@@ -1,5 +1,5 @@
 FROM siwatinc/python3baseimage
-RUN apt-get -y install libxml2-dev libxslt-dev zlib1g-dev python-setuptools python-wheel locales libmagic1 apt-transport-https uwsgi-plugin-python uwsgi && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /usr/share/man/* /root/.cache/*
+RUN apt-get -y install build-essential libxml2-dev libxslt-dev zlib1g-dev python-setuptools python-wheel locales libmagic1 apt-transport-https uwsgi-plugin-python uwsgi && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /usr/share/man/* /root/.cache/*
 RUN apt-get update && apt-get install -y --no-install-suggests --no-install-recommends gnupg2 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /usr/share/man/* /root/.cache/*
 RUN curl -sL https://deb.nodesource.com/setup_8.x |  bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y nodejs yarn && rm -rf /var/lib/apt/list
 RUN pip install uwsgi
 ADD . /opt/yeti
 WORKDIR /opt/yeti
-RUN pip  install -r requirements.txt && \
+RUN pip install -r requirements.txt && \
         yarn install && \
         mv yeti.conf.sample yeti.conf && \
         sed -i '9s/# host = 127.0.0.1/host = mongodb/' yeti.conf && \
