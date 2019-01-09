@@ -8,8 +8,7 @@ RUN apt-get update && apt-get install -y nodejs yarn && rm -rf /var/lib/apt/list
 RUN pip install uwsgi
 ADD . /opt/yeti
 WORKDIR /opt/yeti
-RUN pip install -r requirements.txt && \
-        yarn install && \
+RUN        yarn install && \
         mv yeti.conf.sample yeti.conf && \
         sed -i '9s/# host = 127.0.0.1/host = mongodb/' yeti.conf && \
         sed -i '22s/# host = 127.0.0.1/host = redis/' yeti.conf
